@@ -10,6 +10,6 @@ the agent will return
 - order details
 - price of each order and total price of all orders 
 
-
-# Test
-.env file contains the necessary api keys to run tests codes
+# Note
+- This is on **master** branch by default
+- .env file contains the necessary api keys to run tests codes
