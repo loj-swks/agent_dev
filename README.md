@@ -6,9 +6,8 @@ Build an agent that take
   [orange , 4]
 ]
 
-the agent will return 
-- order details
-- price of each order and total price of all orders 
+the agent will generate
+- price of each order, availability, and total price of all orders 
 
 # Note
 - This is on **master** branch by default
