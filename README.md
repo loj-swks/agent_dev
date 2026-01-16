@@ -12,3 +12,4 @@ the agent will generate
 # Note
 - This is on **master** branch by default
 - .env file contains the necessary api keys to run tests codes
+- experimental run script is in scripts/run_agent.py
