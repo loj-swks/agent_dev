@@ -1,3 +1,5 @@
+import asyncio
+
 import pytest
 
 from agent import graph
@@ -5,7 +7,7 @@ from agent import graph
 pytestmark = pytest.mark.anyio
 
 
-@pytest.mark.langsmith
+# @pytest.mark.langsmith
 async def test_agent_simple_passthrough() -> None:
     inputs = {"changeme": "some_val"}
     res = await graph.ainvoke(inputs)
@@ -13,4 +15,4 @@ async def test_agent_simple_passthrough() -> None:
 
 
 if __name__ == "__main__":
-    pytest.main()
+    test_agent_simple_passthrough()
