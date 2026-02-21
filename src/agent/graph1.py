@@ -6,7 +6,6 @@ from langgraph.graph import StateGraph, START, END
 # --- 1. The State ---
 class AgentState(TypedDict):
     query: str
-    sub_tasks: List[str]
     results: List[dict] 
     history: List[str] = [] 
 
