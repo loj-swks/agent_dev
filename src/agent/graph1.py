@@ -17,8 +17,7 @@ async def sub_task_generator(state: AgentState):
     # Simulates breaking a query into 3 parallel chunks
     tasks = [f"part_{i}" for i in range(3)]
     
-    # We create the 'query_vec' once here to avoid redundant 
-    # work in the parallel workers.
+    # Simulating embedding vectors generation for the 3 chunks
     query_vecs = np.random.rand(512, 3)
 
     return [
