@@ -1,54 +1,55 @@
-"""LangGraph single-node graph template.
+import asyncio
+from typing import TypedDict
+from langgraph.graph import StateGraph, END
 
-Returns a predefined response. Replace logic and configuration as needed.
-"""
+# --- 1. STATE ---
+class ResearchState(TypedDict):
+    topic: str
+    results: list[str] 
 
-from __future__ import annotations
+# --- 2. ASYNC NODES ---
+async def web_researcher(state: ResearchState):
+    print("Starting Web Research...")
+    await asyncio.sleep(1) # Simulate network latency
+    return {"results": ["Web: LangGraph supports async natively."]}
 
-from dataclasses import dataclass
-from typing import Any, Dict
+def news_researcher(state: ResearchState):
+    print("Starting News Research...")
+    # Simulated sync delay (This would block the whole event loop!)
+    import time
+    time.sleep(1) 
+    return {"results": ["News: New version of LangGraph released today."]}
 
-from langgraph.graph import StateGraph
-from langgraph.runtime import Runtime
-from typing_extensions import TypedDict
+async def final_compiler(state: ResearchState):
+    print("Compiling Report...")
+    combined = "\n".join(state["results"])
+    return {"results": [f"FINAL REPORT:\n{combined}"]}
 
+# --- 3. GRAPH CONSTRUCTION ---
+builder = StateGraph(ResearchState)
 
-class Context(TypedDict):
-    """Context parameters for the agent.
+builder.add_node("web_research", web_researcher)
+builder.add_node("news_research", news_researcher)
+builder.add_node("compiler", final_compiler)
 
-    Set these when creating assistants OR when invoking the graph.
-    See: https://langchain-ai.github.io/langgraph/cloud/how-tos/configuration_cloud/
-    """
+builder.set_entry_point("web_research")
 
-    my_configurable_param: str
+# Web and News run in parallel
+builder.add_edge("web_research", "news_research")
+builder.add_edge("news_research", "compiler")
+builder.add_edge("compiler", END)
 
+graph = builder.compile()
+graph.get_graph().print_ascii()
 
-@dataclass
-class State:
-    """Input state for the agent.
+# --- 4. EXECUTION Test code ---
+async def main():
+    inputs = {"topic": "AI Agents"}
+    # and handle the output properly.
+    print("Running graph...")
+    result = graph.invoke(inputs) 
+    print(result)
 
-    Defines the initial structure of incoming data.
-    See: https://langchain-ai.github.io/langgraph/concepts/low_level/#state
-    """
-
-    changeme: str = "example"
-
-
-async def call_model(state: State, runtime: Runtime[Context]) -> Dict[str, Any]:
-    """Process input and returns output.
-
-    Can use runtime context to alter behavior.
-    """
-    return {
-        "changeme": "output from call_model. "
-        f"Configured with {(runtime.context or {}).get('my_configurable_param')}"
-    }
-
-
-# Define the graph
-graph = (
-    StateGraph(State, context_schema=Context)
-    .add_node(call_model)
-    .add_edge("__start__", "call_model")
-    .compile(name="New Graph")
-)
+# Logic to run the script
+if __name__ == "__main__":
+    main()

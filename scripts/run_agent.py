@@ -6,4 +6,6 @@ async def test_agent_simple_passthrough() -> None:
     assert res is not None
 
 if __name__ == "__main__":
-    test_agent_simple_passthrough()
+    import asyncio
+    asyncio.run(test_agent_simple_passthrough())
+    

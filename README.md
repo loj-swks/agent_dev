@@ -1,15 +1,10 @@
-Build an agent that take
-- a list of order 
-  - each order contains a fruit name and the amount
-[
-  [apple, 3]
-  [orange , 4]
-]
+# Install
 
-the agent will generate
-- price of each order, availability, and total price of all orders 
+- Use uv 
+To install, check this website:
+https://docs.astral.sh/uv/getting-started/installation/
 
-# Note
-- This is on **master** branch by default
-- .env file contains the necessary api keys to run tests codes
-- experimental run script is in scripts/run_agent.py
+- Install dependencies
+```
+uv sync
+```
