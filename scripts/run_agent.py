@@ -3,9 +3,10 @@ from agent import graph
 async def test_agent_simple_passthrough() -> None:
     inputs = {"changeme": "some_val"}
     res = await graph.ainvoke(inputs)
-    assert res is not None
+    return res
+    
 
 if __name__ == "__main__":
     import asyncio
-    asyncio.run(test_agent_simple_passthrough())
-    
+    output = asyncio.run(test_agent_simple_passthrough())
+    print(output)
