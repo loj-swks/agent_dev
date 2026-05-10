@@ -2,6 +2,12 @@ version = 1
 revision = 3
 requires-python = "==3.12"
 
+[manifest]
+members = [
+    "agent",
+    "searchlib",
+]
+
 [[package]]
 name = "agent"
 version = "0.0.1"
@@ -11,6 +17,7 @@ dependencies = [
     { name = "langgraph" },
     { name = "langgraph-cli", extra = ["inmem"] },
     { name = "python-dotenv" },
+    { name = "searchlib" },
 ]
 
 [package.optional-dependencies]
@@ -36,6 +43,7 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.11.1" },
     { name = "python-dotenv", specifier = ">=1.0.1" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.6.1" },
+    { name = "searchlib", editable = "searchlib" },
 ]
 provides-extras = ["dev"]
 
@@ -934,6 +942,11 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/a8/b5/d0b7d145963136b564806f6584647af45ab98946660d399ec4da79cae036/ruff-0.14.7-py3-none-win_amd64.whl", hash = "sha256:e17a20ad0d3fad47a326d773a042b924d3ac31c6ca6deb6c72e9e6b5f661a7c6", size = 14531726, upload-time = "2025-11-28T20:54:59.121Z" },
     { url = "https://files.pythonhosted.org/packages/1d/d2/1637f4360ada6a368d3265bf39f2cf737a0aaab15ab520fc005903e883f8/ruff-0.14.7-py3-none-win_arm64.whl", hash = "sha256:be4d653d3bea1b19742fcc6502354e32f65cd61ff2fbdb365803ef2c2aec6228", size = 13609215, upload-time = "2025-11-28T20:55:15.375Z" },
 ]
+
+[[package]]
+name = "searchlib"
+version = "0.1.0"
+source = { editable = "searchlib" }
 
 [[package]]
 name = "setuptools"

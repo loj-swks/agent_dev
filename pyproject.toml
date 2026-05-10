@@ -13,6 +13,7 @@ dependencies = [
     "langgraph>=1.0.0",
     "langgraph-cli[inmem]>=0.4.7",
     "python-dotenv>=1.0.1",
+    "searchlib",
 ]
 
 
@@ -32,6 +33,14 @@ packages = ["langgraph.templates.agent", "agent"]
 
 [tool.setuptools.package-data]
 "*" = ["py.typed"]
+
+[tool.uv.workspace]
+members = [
+    "searchlib",
+]
+
+[tool.uv.sources]
+searchlib = { workspace = true }
 
 # [tool.ruff]
 # lint.select = [
